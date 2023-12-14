@@ -1,0 +1,21 @@
+<svg class="screen">
+  <svg class="time">
+    <text id="date" text-length="20" />
+    <text id="clock" text-length="5" />
+  </svg>
+  <svg class="stats">
+    <svg id="heart-rate-container">
+      <image href="heart_rate_36px.png" />
+      <text id="heart-rate" text-length="3" />
+    </svg>
+    <svg class="walking">
+      <image href="steps_36px.png" />
+      <text id="steps" text-length="20" />
+    </svg>
+    <!-- <svg class="sleep-container">
+      <circle cx="32" cy="32" r="32" />
+      <text id="score" text-length="3" />
+    </svg> -->
+  </svg>
+  <rect id="dim" />
+</svg>

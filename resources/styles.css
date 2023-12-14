@@ -1,0 +1,107 @@
+text {
+  fill: white;
+}
+.screen {
+  width: 100%;
+  height: 100%;
+  /* viewport-fill: black; */
+}
+
+#dim {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  fill: black;
+}
+
+.time {
+  width: 60%;
+  height: 40%;
+  x: 50%;
+  y: 20%;
+}
+
+#date {
+  y: 0;
+  font-size: 32;
+  font-family: System-Regular;
+  text-anchor: middle;
+}
+
+#clock {
+  y: 100%;
+  font-size: 120;
+  font-family: System-Bold;
+  text-anchor: middle;
+}
+
+.stats {
+  width: 60%;
+  height: 60%;
+  x: 20%;
+  y: 70%;
+}
+
+#heart-rate-container {
+  width: 10%;
+  x: 25%;
+  y: 0;
+}
+
+#heart-rate-container text {
+  y: 40;
+  font-size: 28;
+  font-family: System-Bold;
+  text-anchor: middle;
+}
+
+#heart-rate-container image {
+  x: -32;
+  width: 64;
+  height: 64;
+  fill: red;
+}
+
+.walking {
+  width: 10%;
+  height: 100%;
+  x: 75%;
+  y: 0;
+}
+
+.walking image {
+  x: -16;
+  y: 0;
+  width: 32;
+  height: 32;
+  fill: purple;
+}
+
+.walking #steps {
+  y: 30%;
+  font-size: 32;
+  font-family: System-Regular;
+  text-anchor: middle;
+}
+
+.sleep-container {
+  width: 10%;
+  height: 100%;
+  x: 90%;
+  y: 0;
+}
+
+.sleep-container circle {
+  fill: aqua;
+  stroke: aqua;
+  stroke-width: 5;
+}
+
+.sleep-container text {
+  fill: black;
+  x: 32;
+  y: 40;
+  font-size: 28;
+  font-family: System-Bold;
+  text-anchor: middle;
+}
