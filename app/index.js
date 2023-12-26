@@ -1,10 +1,46 @@
 import clock from "clock";
 import * as document from "document";
+import * as messaging from "messaging";
 import { HeartRateSensor } from "heart-rate";
 import { BodyPresenceSensor } from "body-presence";
-import { today, goals } from "user-activity";
+import { today } from "user-activity";
 import { display } from "display";
 import sleep from "sleep";
+
+const Tap = (element, callback) => {
+  let timer;
+  let count = 0;
+  element.onclick = () => {
+    count++;
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      callback(count);
+      count = 0;
+    }, 350);
+  };
+};
+
+/**
+ * Settings
+ */
+const ASLEEP_BRIGHTNESS_KEY = "asleepBrightness";
+const FLASHLIGHT_COLOR_KEY = "flashlightColor";
+const settings = {
+  brightness: 0.7,
+  color: "white",
+};
+messaging.peerSocket.addEventListener("message", (evt) => {
+  if (evt && evt.data) {
+    switch (evt.data.key) {
+      case ASLEEP_BRIGHTNESS_KEY:
+        settings.brightness = 1.0 - Number(evt.data.value) / 100;
+        break;
+      case FLASHLIGHT_COLOR_KEY:
+        settings.color = evt.data.value;
+        break;
+    }
+  }
+});
 
 /**
  * Time
@@ -58,8 +94,6 @@ hrm.onreading = () => {
   heartRate.text = hrm.heartRate;
 };
 
-hrm.start();
-
 /**
  * Activity
  */
@@ -77,19 +111,43 @@ const updateSteps = (() => {
 })();
 
 /**
- * Manage features
+ * Flashlight
  */
 const dim = document.getElementById("dim");
+Tap(dim, (count) => {
+  if (count === 3) {
+    if (dim.class === "flashlight") {
+      dim.class = "dim";
+      dim.style.fill = "black";
+    } else {
+      dim.class = "flashlight";
+      dim.style.fill = settings.color;
+    }
+  }
+});
+
+/**
+ * Manage features
+ */
 const bodyPresence = new BodyPresenceSensor();
 display.onchange = () => {
   updateSteps(display.on);
 
-  // Dim screen while asleep
-  if (display.on) dim.style.opacity = sleep.state === "asleep" ? 0.5 : 0;
+  dim.class = "dim";
+  if (display.on) {
+    hrm.start();
+    dim.style.opacity = sleep.state === "asleep" ? settings.brightness : 0;
+  } else {
+    hrm.stop();
+  }
 };
 bodyPresence.onreading = () => {
-  console.log(bodyPresence.present);
   changeHeartRateVisibility(bodyPresence.present);
   updateSteps(bodyPresence.present);
+  if (!bodyPresence.present) {
+    hrm.stop();
+  } else {
+    hrm.start();
+  }
 };
 bodyPresence.start();

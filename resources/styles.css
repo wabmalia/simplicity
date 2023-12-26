@@ -7,11 +7,18 @@ text {
   /* viewport-fill: black; */
 }
 
-#dim {
+.dim {
   width: 100%;
   height: 100%;
   opacity: 0;
   fill: black;
+}
+
+.flashlight {
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  fill: white;
 }
 
 #debug {

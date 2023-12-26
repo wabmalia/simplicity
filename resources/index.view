@@ -13,6 +13,6 @@
       <text id="steps" text-length="20" />
     </svg>
   </svg>
-  <rect id="dim" />
+  <rect id="dim" class="dim" pointer-events="visible" />
 </svg>
 <!-- <rect id="debug" /> -->
