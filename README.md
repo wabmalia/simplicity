@@ -2,6 +2,11 @@
 
 A custom Fitbit facewatch that allowed me to understand what my device provides and also create something more to my taste.
 
+# Features
+This watch targets simplicity, however there are some hidden things that make it very functional.
+- Flashlight - `Triple-tap` to activate a flashlight, it is something that I regularly need when searching something in a low-light environment;
+- Asleep brightness - When the watch detects you as being asleep, when I try to see the time at 3am I often get "flashed". With this facewatch, it dims the brightness in order to make it less painful to glimpse time.
+
 # Requirements
 - Node
 - [Fitbit OS Simulator](https://dev.fitbit.com/release-notes/fitbit-os-simulator/)
