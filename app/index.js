@@ -77,12 +77,6 @@ const updateSteps = (() => {
 })();
 
 /**
- * Sleep
- */
-
-
-
-/**
  * Manage features
  */
 const dim = document.getElementById("dim");
