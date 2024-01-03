@@ -49,6 +49,27 @@ text {
   text-anchor: middle;
 }
 
+#am-pm {
+  y: 80%;
+  font-size: 18;
+  font-family: System-Bold;
+  text-anchor: middle;
+}
+
+.dots {
+  font-size: 120;
+  font-family: System-Bold;
+  text-anchor: middle;
+}
+
+#dot-top {
+  y: 60%;
+}
+
+#dot-bottom {
+  y: 100%;
+}
+
 .stats {
   width: 60%;
   height: 20%;

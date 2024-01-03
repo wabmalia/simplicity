@@ -6,6 +6,7 @@ import { BodyPresenceSensor } from "body-presence";
 import { today } from "user-activity";
 import { display } from "display";
 import sleep from "sleep";
+import { preferences } from "user-settings";
 
 const Tap = (element, callback) => {
   let timer;
@@ -64,20 +65,33 @@ const month = [
 const getDay = (date) =>
   `${month[date.getMonth()]} ${date.getDate()}, ${weekdays[date.getDay()]}`;
 
-const zeroPad = (i) => (i < 10 ? (i = "0" + i) : i);
+const monoDigits = (number) => {
+  const text = number.toString();
+  const [tens, unit] = text;
+  const mono = (n) => {
+    return String.fromCharCode(0x10 + Number(n));
+  };
+  return `${mono(tens)}${mono(unit)}`;
+};
+const formatTime = (i) => monoDigits(i < 10 ? (i = "0" + i) : i);
 
 clock.granularity = "minutes";
 
 const time = document.getElementById("clock");
 const date = document.getElementById("date");
+const amPm = document.getElementById("am-pm");
 
 clock.ontick = (evt) => {
+  const is24h = preferences.clockDisplay === "24h";
   const today = evt.date;
-  const hours = zeroPad(today.getHours());
-  const mins = zeroPad(today.getMinutes());
-  time.text = `${hours}:${mins}`;
+  const hours = formatTime(is24h ? today.getHours() : today.getHours() % 12);
+  const mins = formatTime(today.getMinutes());
+  time.text = `${hours} ${mins}`;
 
   date.text = getDay(today);
+  const isAfternoon = today.getHours() / 12 >= 1;
+  amPm.style.display = is24h ? "none" : "";
+  amPm.text = isAfternoon ? "PM" : "AM";
 };
 
 /**

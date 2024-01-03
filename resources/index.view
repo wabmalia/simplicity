@@ -2,6 +2,9 @@
   <svg class="time">
     <text id="date" text-length="20" />
     <text id="clock" text-length="5" />
+    <text id="dot-top" class="dots" text-length="1">.</text>
+    <text id="dot-bottom" class="dots" text-length="1">.</text>
+    <text id="am-pm" text-length="2">AM</text>
   </svg>
   <svg class="stats">
     <svg id="heart-rate-container" class="stat-container">
